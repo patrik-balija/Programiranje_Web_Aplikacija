@@ -16,6 +16,10 @@
             require_once __DIR__ . '/../views/products.php';
             break;
 
+        case "details":
+            require_once __DIR__ . '/../views/details.php';
+            break;
+         
         case "about":
             require_once __DIR__ . '/../views/about.php';
             break;

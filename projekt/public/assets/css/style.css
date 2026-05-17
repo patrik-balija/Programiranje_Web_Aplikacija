@@ -7,12 +7,26 @@
     box-sizing: border-box;
 }
 
+/* Restore normal list styling after reset */
+ul,
+ol {
+    padding-left: 20px;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f8;
     color: #1a1a1a;
     line-height: 1.6;
-    
+
     /* Keeps the footer at the bottom of short pages */
     display: flex;
     flex-direction: column;
@@ -24,7 +38,7 @@ body {
    ========================================================================== */
 .main-header {
     background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Soft header shadow */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -35,7 +49,7 @@ body {
     margin: 0 auto;
     padding: 15px 20px;
     display: flex;
-    justify-content: space-between; /* Pushes logo left, nav-container right */
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -52,14 +66,15 @@ body {
 .nav-container {
     display: flex;
     align-items: center;
-    gap: 30px; /* Space between links and the login button */
+    gap: 30px;
 }
 
 /* Nav Links List */
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 24px; /* Space between individual links */
+    gap: 24px;
+    padding-left: 0; /* Prevent bullets in navbar */
 }
 
 .nav-links a {
@@ -71,7 +86,7 @@ body {
 }
 
 .nav-links a:hover {
-    color: #0066cc; /* Subtle blue shift on hover */
+    color: #0066cc;
 }
 
 /* Login Button */
@@ -109,12 +124,12 @@ body {
     letter-spacing: -0.5px;
 }
 
-/* Grid layout centered, cards max out at 300px so they don't look stretched */
+/* Grid layout centered */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 300px));
     gap: 30px;
-    justify-content: center; 
+    justify-content: center;
 }
 
 /* ==========================================================================
@@ -130,13 +145,12 @@ body {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Hover effects for the entire card */
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* Card Image Box - Set up as an uncropped canvas */
+/* Card Image Box */
 .card-image {
     width: 100%;
     height: 220px;
@@ -145,21 +159,20 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px; 
+    padding: 15px;
 }
 
-/* Contain behavior stops images from zooming in and cropping */
 .card-image img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
-    object-fit: contain; 
+    object-fit: contain;
     transition: transform 0.3s ease;
 }
 
 .product-card:hover .card-image img {
-    transform: scale(1.03); 
+    transform: scale(1.03);
 }
 
 /* Card Content Body */
@@ -182,14 +195,14 @@ body {
     font-size: 0.9rem;
     color: #666666;
     margin-bottom: 20px;
-    /* Limits description text to 3 lines cleanly */
+
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-/* Detalji Button (Matches btn-login design specs) */
+/* Detalji Button */
 .btn-details {
     display: block;
     text-align: center;
@@ -200,7 +213,7 @@ body {
     border-radius: 6px;
     font-size: 0.9rem;
     font-weight: 500;
-    margin-top: auto; /* Aligns button to bottom of card perfectly */
+    margin-top: auto;
     transition: background-color 0.2s ease;
 }
 
@@ -213,8 +226,8 @@ body {
    ========================================================================== */
 .main-footer {
     background-color: #ffffff;
-    border-top: 1px solid #e1e4e8; /* Subtle separator line */
-    margin-top: auto; /* Ensures it anchors to the bottom */
+    border-top: 1px solid #e1e4e8;
+    margin-top: auto;
 }
 
 .footer-container {

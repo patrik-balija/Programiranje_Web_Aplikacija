@@ -17,7 +17,7 @@ $result = mysqli_query($conn, $query);
             <div class="card-content">
                 <h2><?php echo $row["name"]; ?></h2>
                 <p><?php echo $row["short_description"]; ?></p>
-                <a href="#" class="btn-details">Detalji</a>
+                <a href="index.php?url=details&id=<?php echo $row["id"]; ?>" class="btn-details">Detalji</a>
             </div>
         </div>
         <?php endwhile; ?>

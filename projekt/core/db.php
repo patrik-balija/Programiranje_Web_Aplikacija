@@ -5,7 +5,7 @@
     $db_name = "cnc_webshop";
 
         try{
-            $conn = new mysqli_connect(
+            $conn = mysqli_connect(
             $db_server, 
             $db_user, 
             $db_password, 

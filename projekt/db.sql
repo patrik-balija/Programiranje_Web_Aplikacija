@@ -2,6 +2,32 @@ DROP DATABASE IF EXISTS cnc_webshop;
 CREATE DATABASE cnc_webshop;
 USE cnc_webshop;
 
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE carts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE cart_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+
+    FOREIGN KEY (cart_id) REFERENCES carts(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
 CREATE TABLE products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -28,34 +54,6 @@ CREATE TABLE product_applications (
 CREATE TABLE product_industries (
     industry_id INT AUTO_INCREMENT PRIMARY KEY,
     industry_name VARCHAR(50) NOT NULL,
-    id INT,
-    FOREIGN KEY (id) REFERENCES products(id) ON DELETE CASCADE
-);
-
-CREATE TABLE product_images (
-    image_id INT AUTO_INCREMENT PRIMARY KEY,
-    image_path VARCHAR(255) NOT NULL,
-    id INT,
-    FOREIGN KEY (id) REFERENCES products(id) ON DELETE CASCADE
-);
-
-CREATE TABLE product_highlights (
-    highlight_id INT AUTO_INCREMENT PRIMARY KEY,
-    highlight_text VARCHAR(255) NOT NULL,
-    id INT,
-    FOREIGN KEY (id) REFERENCES products(id) ON DELETE CASCADE
-);
-
-CREATE TABLE product_features (
-    feature_id INT AUTO_INCREMENT PRIMARY KEY,
-    feature_text VARCHAR(255) NOT NULL,
-    id INT,
-    FOREIGN KEY (id) REFERENCES products(id) ON DELETE CASCADE
-);
-
-CREATE TABLE product_options (
-    option_id INT AUTO_INCREMENT PRIMARY KEY,
-    option_text VARCHAR(255) NOT NULL,
     id INT,
     FOREIGN KEY (id) REFERENCES products(id) ON DELETE CASCADE
 );
@@ -93,51 +91,6 @@ VALUES
 ("Izrada kalupa i prototipova", 1), 
 ("Medicinska tehnologija", 1);
 
-INSERT INTO product_images (image_path, id)
-VALUES 
-("euromod1.png", 1), 
-("euromod2.png", 1), 
-("euromod3.png", 1), 
-("euromod4.png", 1);
-
-INSERT INTO product_highlights (highlight_text, id)
-VALUES 
-("Visoka stabilnost u X-osi", 1),
-("Velika visina prolaza", 1),
-("Pomična Y-os, optimalna izmjena materijala", 1),
-("Dostupno u tri veličine", 1);
-
-INSERT INTO product_features (feature_text, id)
-VALUES
-("Snažan isel upravljački sustav s održavanja oslobođenim servomotorima", 1),
-("Pouzdane LES jedinice sa čeličnim kugličnim vretenima koriste se kao pogoni", 1),
-("Jednostavno rukovanje zahvaljujući CNC upravljačkoj ploči podesivoj po visini", 1),
-("Upravljačko računalo kompatibilno s mrežom s operativnim sustavom WINDOWS", 1),
-("Paralelna klizna vrata", 1),
-("Stezanje obradaka pomoću T-utorne ploče", 1);
-
-INSERT INTO product_options (option_text, id)
-VALUES
-("iSA glodalačka vretena i vodom hlađena HF vretena", 1),
-("Rotacijske i linearne stanice za izmjenu alata", 1),
-("Sustav za raspršivanje rashladnog sredstva", 1),
-("Cool-Min sustav hlađenja hladnim zrakom", 1),
-("Automatsko mjerenje duljine alata", 1),
-("Kontrola loma alata", 1),
-("Elektronički ručni kotač", 1),
-("Pneumatska klizna vrata", 1),
-("Rotacijske jedinice", 1),
-("Sigurnosna svjetlosna zavjesa", 1),
-("Zatvorena ili svjetlosno nepropusna zaštitna hauba za laserske primjene", 1),
-("Nadogradnja zaštitne haube za povećani prolaz portala", 1),
-("Sustavi za stezanje obradaka (ručna poluga, vakuumski stolovi itd.)", 1),
-("Sustavi za odsis", 1),
-("LED rasvjeta radnog prostora stroja", 1),
-("Odabir RAL boje", 1),
-("PC upravljačka jedinica s slobodnim PCI utorima (za korištenje vanjskog PCI hardvera)", 1),
-("Prilagodbe sučelja", 1),
-("CAD/CAM softver", 1);
-
 -- OverHead
 
 INSERT INTO products (name, short_description, long_description, type, main_image) 
@@ -171,51 +124,3 @@ VALUES
 ("Obrazovanje i osposobljavanje", 2), 
 ("Izrada kalupa i prototipova", 2), 
 ("Medicinska tehnologija", 2);
-
-INSERT INTO product_images (image_path, id)
-VALUES 
-("overhead1.png", 2), 
-("overhead2.png", 2), 
-("overhead3.png", 2), 
-("overhead4.png", 2);
-
-INSERT INTO product_highlights (highlight_text, id)
-VALUES 
-("Optimalno iskorištenje prostora, slobodna zona obrade", 2),
-("Optimalna zaštita od strugotine zahvaljujući nadzemnim osima", 2),
-("Posebno pogodno za visoke i glomazne komponente", 2),
-("Dostupno u pet veličina", 2);
-
-INSERT INTO product_features (feature_text, id)
-VALUES
-("Potpuno slobodna površina stola za stezanje", 2),
-("Snažan isel upravljački sustav s održavanja oslobođenim servomotorima", 2),
-("Pouzdane LES jedinice sa čeličnim kugličnim vretenima koriste se kao pogoni", 2),
-("Jednostavno rukovanje zahvaljujući CNC upravljačkoj ploči podesivoj po visini", 2),
-("Upravljačko računalo kompatibilno s mrežom s operativnim sustavom WINDOWS", 2),
-("Paralelna klizna vrata", 2),
-("Stezanje obradaka pomoću T-utorne ploče", 2),
-("Varijabilni otvori portala, ovisno o primjeni kupca", 2);
-
-INSERT INTO product_options (option_text, id)
-VALUES
-("iSA glodalačka vretena i vodom hlađena HF vretena", 2),
-("Rotacijske i linearne stanice za izmjenu alata", 2),
-("Sustav za raspršivanje rashladnog sredstva", 2),
-("Cool-Min sustav hlađenja hladnim zrakom", 2),
-("Automatsko mjerenje duljine alata", 2),
-("Kontrola loma alata", 2),
-("Elektronički ručni kotač", 2),
-("Pneumatska klizna vrata", 2),
-("Rotacijske jedinice", 2),
-("Maksimalno 6 interpolirajućih osi + 6 manipulacijskih osi", 2),
-("Sigurnosna svjetlosna zavjesa", 2),
-("Zatvorena ili svjetlosno nepropusna zaštitna hauba za laserske primjene", 2),
-("Nadogradnja haube s povećanim otvorom portala", 2),
-("Sustavi za stezanje obradaka (ručna poluga, vakuumski stolovi itd.)", 2),
-("Sustavi za odsis", 2),
-("Bočno utovarivanje za integraciju u proizvodne linije", 2),
-("LED rasvjeta radnog prostora stroja", 2),
-("PC upravljačka jedinica s slobodnim PCI utorima (za korištenje vanjskog PCI hardvera)", 2),
-("Prilagodbe sučelja", 2),
-("CAD/CAM softver", 2);
