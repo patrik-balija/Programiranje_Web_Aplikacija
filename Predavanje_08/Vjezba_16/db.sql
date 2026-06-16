@@ -1,0 +1,13 @@
+DROP DATABASE IF EXISTS ispit_vjezba;
+CREATE DATABASE ispit_vjezba;
+USE ispit_vjezba;
+
+CREATE TABLE users(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(64) NOT NULL,
+    last_name VARCHAR(64) NOT NULL,
+    email VARCHAR(128) NOT NULL UNIQUE,
+    username VARCHAR(128) NOT NULL UNIQUE,
+    password VARCHAR(128) NOT NULL,
+    country VARCHAR(64) NOT NULL
+);
